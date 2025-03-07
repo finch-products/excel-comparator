@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comparison Results</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 Comparison Result</h1>
+        <p>Files compared: <strong>{{ file1 }}</strong> & <strong>{{ file2 }}</strong></p>
+        
+        <div class="comparison-box">
+            <p>Click below to generate and download the comparison report.</p>
+            <form action="/compare" method="post">
+                <input type="hidden" name="file1" value="{{ file1 }}">
+                <input type="hidden" name="file2" value="{{ file2 }}">
+                <button type="submit" class="btn">Generate & Download Report</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
