@@ -42,17 +42,8 @@ def compare():
         for sheet in sheets:
             df1 = pd.read_excel(xls1, sheet_name=sheet)
             df2 = pd.read_excel(xls2, sheet_name=sheet)
-            
-            primary_key = None
-            for col in df1.columns:
-                if df1[col].dtype in ['int64', 'int32']:
-                    primary_key = col
-                    break
-            
-            if primary_key:
-                diff_df = df1[~df1[primary_key].isin(df2[primary_key])]
-            else:
-                diff_df = df1.merge(df2, how='outer', indicator=True).query('_merge == "left_only"').drop('_merge', axis=1)
+    
+            diff_df = df1.merge(df2, how='outer', indicator=True).query('_merge == "left_only"').drop('_merge', axis=1)
             
             if not diff_df.empty:
                 diff_df.to_excel(writer, sheet_name=f"{sheet}_{today_date}", index=False)
